@@ -32,6 +32,7 @@ public class TicTacToe {
         gameEnd = false;
         input = new Scanner(System.in);
         turn = player1;
+        gameEnd = false;
     }
 
     public void startTicTacToe(int choseNumber, String pTurn) {
@@ -48,10 +49,16 @@ public class TicTacToe {
                 System.out.println(turn + "'s turn. Enter a number (1-9) to choose a space:");
             } else if (result.equals("p1")){
                 System.out.println("Player 1 wins!");
+                gameEnd = true;
+                Main.menu();
             } else if (result.equals("p2")){
                 System.out.println("Player 2 wins!");
+                gameEnd = true;
+                Main.menu();
             } else if (result.equals("draw")){
                 System.out.println("Draw!");
+                gameEnd = true;
+                Main.menu();
             }
         }
     }
@@ -133,7 +140,6 @@ public class TicTacToe {
         while(!gameEnd) {
             try {
                 int numInput = input.nextInt();
-                System.out.println("numInput " + numInput);
                 startTicTacToe(numInput, turn);
             } catch (Exception e) {
                 System.out.println("Invalid input! Please enter a valid number.");

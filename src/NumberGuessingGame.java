@@ -32,15 +32,18 @@ public class NumberGuessingGame {
             System.out.println("Congratulations! You have guessed the correct number in " + numberOfAttempts + " attempts.");
             System.out.println("\nThanks for playing the Number Guessing game!");
             gameEnd = true;
+            Main.menu();
         } else if (numberOfAttempts == maxNumOfInput){
             numberOfAttempts++;
             System.out.println("Game over! You have run out of attempts.");
             System.out.println("The correct number was: " + randomNumber);
             gameEnd = true;
+            Main.menu();
         } else {
             System.out.println("Guess " + numberOfAttempts);
             System.out.println(String.format("Your guess is too %s. The number is between %s and %s. Please Try again!", numberStatus, lowerInterval, upperInterval));
             numberOfAttempts++;
+            Main.menu();
         }
     }
 
