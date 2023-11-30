@@ -1,6 +1,5 @@
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Hangman {
     private int turn;
@@ -9,8 +8,9 @@ public class Hangman {
     private boolean gameEnd;
     private String[] wordPool;
     private int randomNum;
-    private String[] hangMan;
-    private String[] result;
+    private String[] parts;
+    private String word;
+    private String[] tempWord;
     private String gameBoard;
     public Hangman(){
         turn = 7;
@@ -18,29 +18,33 @@ public class Hangman {
         input = new Scanner(System.in);
         wordPool = new String[]{"tab", "table", "fork"};
         randomNum = (int) (Math.random() * wordPool.length);
-        hangMan = new String[]{"O", "\\", "|", "/", "|", "/", "\\"};
+        word = wordPool[randomNum];
+        tempWord = new String[word.length()];
+        parts = new String[]{"O", "\\", "|", "/", "|", "/", "\\"};
     }
-    public void startHangMan(String input) {
-        String word = wordPool[randomNum];
-        String[] hiddenWord = {};
+    public void startHangMan(String t) {
+        String result = "";
         for (int i =  0; i < word.length(); i++){
-            hiddenWord[i] = "_";
+            tempWord[i] = "_";
         }
-        System.out.println("hiddenWord" + hiddenWord);
-        System.out.println("randomNum: "+ randomNum);
-        System.out.println("word: "+ wordPool[randomNum]);
-        int index = word.indexOf(input);
+//        System.out.println("tempWord" + Arrays.toString(tempWord));
+//        System.out.println("randomNum: "+ randomNum);
+//        System.out.println("word: "+ wordPool[randomNum]);
+//        System.out.println("word length: "+ word.length());
+        int index = word.indexOf(t);
+        System.out.println("t: "+ t);
+        System.out.println("index: "+ index);
         if (index >= 0) {
-            result[index] = input;
-            for (String letter : result) {
-                word += letter;
+            tempWord[index] = t;
+            for (String letter : tempWord) {
+                result += letter;
             }
-            System.out.println(word);
+            System.out.println("tempWord 2: " + result);
         } else {
             turn--;
-            for (String letter : result) {
-                word += letter;
-            }
+//            for (String letter : hiddenWorld) {
+//                word += letter;
+//            }
             if (turn == 0) {
                 System.out.println("Game Over!");
                 gameEnd = true;
@@ -53,10 +57,10 @@ public class Hangman {
     public void printBoard() {
         System.out.println("---------");
         System.out.printf("%2s%4s\n", "|", "|");
-        System.out.printf("%2s%4s\n", "|", hangMan[0]);
-        System.out.printf("%2s%3s%1s%1s\n", "|", hangMan[1], hangMan[2], hangMan[3]);
-        System.out.printf("%2s%4s\n", "|", hangMan[4]);
-        System.out.printf("%2s%3s%2s\n", "|", hangMan[5], hangMan[6]);
+        System.out.printf("%2s%4s\n", "|", parts[0]);
+        System.out.printf("%2s%3s%1s%1s\n", "|", parts[1], parts[2], parts[3]);
+        System.out.printf("%2s%4s\n", "|", parts[4]);
+        System.out.printf("%2s%3s%2s\n", "|", parts[5], parts[6]);
         System.out.printf("%2s\n", "|");
         System.out.println("_|_");
     }
@@ -66,8 +70,12 @@ public class Hangman {
         while (!gameEnd) {
             try {
                 String letterInput = input.nextLine();
-                System.out.println("Guess a letter: " + letterInput);
-                startHangMan(letterInput);
+                if (letterInput.length() != 1) {
+                    System.out.println("Invalid input! Please enter a valid letter.");
+                } else {
+                    System.out.println("Guess a letter: " + letterInput);
+                    startHangMan(letterInput);
+                }
             } catch (Exception e) {
                 System.out.println("Invalid input! Please enter a valid letter.");
                 input.nextLine();
