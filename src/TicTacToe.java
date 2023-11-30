@@ -48,15 +48,15 @@ public class TicTacToe {
             if (result.isEmpty()) {
                 System.out.println(turn + "'s turn. Enter a number (1-9) to choose a space:");
             } else if (result.equals("p1")){
-                System.out.println("Player 1 wins!");
+                System.out.println("Player 1 wins!\n");
                 gameEnd = true;
                 Main.menu();
             } else if (result.equals("p2")){
-                System.out.println("Player 2 wins!");
+                System.out.println("Player 2 wins!\n");
                 gameEnd = true;
                 Main.menu();
             } else if (result.equals("draw")){
-                System.out.println("Draw!");
+                System.out.println("Draw!\n");
                 gameEnd = true;
                 Main.menu();
             }
