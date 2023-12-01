@@ -10,6 +10,7 @@ public class TicTacToe {
     private boolean gameEnd;
     private Scanner input;
     private String turn;
+    private int round;
 
     public TicTacToe() {
         player1 = "Player 1";
@@ -33,6 +34,7 @@ public class TicTacToe {
         input = new Scanner(System.in);
         turn = player1;
         gameEnd = false;
+        round = 0;
     }
 
     public void startTicTacToe(int choseNumber, String pTurn) {
@@ -43,23 +45,21 @@ public class TicTacToe {
             updateBoard(choseNumber, boardValue);
             System.out.println(gameBoard);
             turn = pTurn.equals(player1) ? player2: player1;
-            checkWinner();
             String result = checkWinner();
             if (result.isEmpty()) {
                 System.out.println(turn + "'s turn. Enter a number (1-9) to choose a space:");
-            } else if (result.equals("p1")){
+                return;
+            }
+            if (result.equals("p1")){
                 System.out.println("Player 1 wins!\n");
-                gameEnd = true;
-                Main.menu();
             } else if (result.equals("p2")){
                 System.out.println("Player 2 wins!\n");
-                gameEnd = true;
-                Main.menu();
             } else if (result.equals("draw")){
                 System.out.println("Draw!\n");
-                gameEnd = true;
-                Main.menu();
             }
+
+            gameEnd = true;
+            Main.menu();
         }
     }
 
@@ -76,11 +76,10 @@ public class TicTacToe {
     }
 
     public boolean checkDuplicate(int choseNumber) {
-        boolean duplicate = false;
         boolean p1 = board[choseNumber - 1].contains(String.valueOf("O"));
         boolean p2 = board[choseNumber - 1].contains(String.valueOf("X"));
         if (!p1 && !p2) {
-            return duplicate;
+            return false;
         } return true;
     }
 
@@ -121,15 +120,10 @@ public class TicTacToe {
                 result = "p2";
             }
         }
+        round++;
         //check draw
-        for (int i = 0; i < 9; i ++) {
-            if (Arrays.asList(board).contains(
-                    String.valueOf(i + 1))) {
-                break;
-            }
-            else if (i == 8) {
-                result = "draw";
-            }
+        if (round == 9 && result.equals("")){
+            result = "draw";
         }
         return result;
     }

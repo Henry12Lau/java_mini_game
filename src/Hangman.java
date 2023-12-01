@@ -51,7 +51,7 @@ public class Hangman {
                 result += letter;
             }
             System.out.println(result);
-            if (turn == 0) {
+            if (turn <= 0) {
                 System.out.println("Game Over!\n");
                 gameEnd = true;
                 Main.menu();
