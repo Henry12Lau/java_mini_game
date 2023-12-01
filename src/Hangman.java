@@ -85,6 +85,7 @@ public class Hangman {
     public void run() {
         System.out.println(intro);
         printBoard();
+        System.out.println("Please input a letter.");
         while (!gameEnd) {
             try {
                 String letterInput = input.nextLine().toLowerCase();
