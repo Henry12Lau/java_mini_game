@@ -25,7 +25,6 @@ public class NumberGuessingGame {
         numberStatus = "low";
     }
     public void startGuessingGame(int guessNumber) {
-//        System.out.println("Debug - numberOfAttempts: " +numberOfAttempts+ " maxNumOfInput: "+maxNumOfInput);
         changeRange(guessNumber);
         if (guessNumber == randomNumber) {
             System.out.println("Guess " + numberOfAttempts);
@@ -43,7 +42,6 @@ public class NumberGuessingGame {
             System.out.println("Guess " + numberOfAttempts);
             System.out.println(String.format("Your guess is too %s. The number is between %s and %s. Please Try again!", numberStatus, lowerInterval, upperInterval)+ "\n");
             numberOfAttempts++;
-            Main.menu();
         }
     }
 

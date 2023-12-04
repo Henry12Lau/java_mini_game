@@ -25,12 +25,6 @@ public class TicTacToe {
                 ----------
                 %s | %s | %s
                 """, board[0], board[1], board[2], board[3], board[4], board[5], board[6], board[7], board[8]);
-//        intro = String.format("""
-//            Welcome to Tic Tac Toe!
-//
-//            %s: O
-//            %s: X
-//            """, player1, player2);
         gameEnd = false;
         input = new Scanner(System.in);
         turn = player1;
