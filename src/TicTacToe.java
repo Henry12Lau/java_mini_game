@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class TicTacToe {
     private String player1;
@@ -145,17 +146,27 @@ public class TicTacToe {
         System.out.println("Please enter player 2 name: ");
         String p2Name = input.nextLine();
         updatePlayerName(p1Name, p2Name);
+        System.out.println(intro);
+        System.out.println(gameBoard);
+        System.out.println(turn + "'s turn. Enter a number (1-9) to choose a space:");
         while(!gameEnd) {
-            try {
-                System.out.println(intro);
-                System.out.println(gameBoard);
-                System.out.println(turn + "'s turn. Enter a number (1-9) to choose a space:");
-                int numInput = input.nextInt();
-                startTicTacToe(numInput, turn);
-            } catch (Exception e) {
-                System.out.println("Invalid input! Please enter a valid number.");
-                input.nextInt();
+            boolean validInput = false;
+            int numInput = 0;
+
+            while (!validInput) {
+                String inputStr = input.nextLine();
+                try {
+                    numInput = Integer.parseInt(inputStr);
+                    if (numInput < 1 || numInput > 9) {
+                        System.out.println("Invalid input! Please enter a number between 1 and 9.\n");
+                    } else {
+                        validInput = true;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input! Please enter a number between 1 and 9.\n");
+                }
             }
+            startTicTacToe(numInput, turn);
         }
     }
 }
