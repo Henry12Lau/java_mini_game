@@ -24,12 +24,12 @@ public class TicTacToe {
                 ----------
                 %s | %s | %s
                 """, board[0], board[1], board[2], board[3], board[4], board[5], board[6], board[7], board[8]);
-        intro = """
-            Welcome to Tic Tac Toe!
-            
-            Player 1: O
-            Player 2: X
-            """;
+//        intro = String.format("""
+//            Welcome to Tic Tac Toe!
+//
+//            %s: O
+//            %s: X
+//            """, player1, player2);
         gameEnd = false;
         input = new Scanner(System.in);
         turn = player1;
@@ -41,7 +41,7 @@ public class TicTacToe {
         if (checkDuplicate(choseNumber)) {
             System.out.println("Your number has been chosen, please try again.");
         } else {
-            String boardValue = pTurn.equals("Player 1") ? "O": "X";
+            String boardValue = pTurn.equals(player1) ? "O": "X";
             updateBoard(choseNumber, boardValue);
             System.out.println(gameBoard);
             turn = pTurn.equals(player1) ? player2: player1;
@@ -51,9 +51,9 @@ public class TicTacToe {
                 return;
             }
             if (result.equals("p1")){
-                System.out.println("Player 1 wins!\n");
+                System.out.println(player1 + " wins!\n");
             } else if (result.equals("p2")){
-                System.out.println("Player 2 wins!\n");
+                System.out.println(player2 + " wins!\n");
             } else if (result.equals("draw")){
                 System.out.println("Draw!\n");
             }
@@ -127,12 +127,29 @@ public class TicTacToe {
         }
         return result;
     }
+    public void updatePlayerName(String name1, String name2) {
+        player1 = name1;
+        player2 = name2;
+        turn = player1;
+        intro = String.format("""
+        Welcome to Tic Tac Toe!
+        
+        %s: O
+        %s: X
+        """, name1, name2);
+    }
 
     public void run() {
-        System.out.println(intro);
-        System.out.println(gameBoard);
+        System.out.println("Please enter player 1 name: ");
+        String p1Name = input.nextLine();
+        System.out.println("Please enter player 2 name: ");
+        String p2Name = input.nextLine();
+        updatePlayerName(p1Name, p2Name);
         while(!gameEnd) {
             try {
+                System.out.println(intro);
+                System.out.println(gameBoard);
+                System.out.println(turn + "'s turn. Enter a number (1-9) to choose a space:");
                 int numInput = input.nextInt();
                 startTicTacToe(numInput, turn);
             } catch (Exception e) {

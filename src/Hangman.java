@@ -10,30 +10,24 @@ public class Hangman {
     private String[] body;
     private String word;
     private String[] tempWord;
+    private int hp;
     public Hangman(){
         turn = 7;
         intro = "Welcome to Hangman!";
         input = new Scanner(System.in);
         wordPool = new String[]{"tab", "table", "fork"};
-//        wordPool = new String[]{"tab"};
         randomNum = (int) (Math.random() * wordPool.length);
         word = wordPool[randomNum];
         tempWord = new String[word.length()];
         for (int i =  0; i < word.length(); i++){
             tempWord[i] = "_";
         }
-//        tempWord = new String[]{"_", "_", "_"};
         body = new String[]{"O", "\\", "|", "/", "|", "/", "\\"};
+        hp = 100;
     }
     public void startHangMan(String t) {
         String result = "";
-//        System.out.println("tempWord" + Arrays.toString(tempWord));
-//        System.out.println("randomNum: "+ randomNum);
-//        System.out.println("word: "+ wordPool[randomNum]);
-//        System.out.println("word length: "+ word.length());
         int index = word.indexOf(t);
-//        System.out.println("t: "+ t);
-//        System.out.println("index: "+ index);
         if (index >= 0) {
             tempWord[index] = t;
             for (String letter : tempWord) {
@@ -47,6 +41,7 @@ public class Hangman {
             }
         } else {
             turn--;
+            hp -= 10;
             for (String letter : tempWord) {
                 result += letter;
             }
@@ -63,7 +58,7 @@ public class Hangman {
     }
     public void printBoard(int pTurn) {
         body[turn] = "";
-        System.out.println("---------");
+        System.out.println("--------- HP: " + hp);
         System.out.printf("%2s%4s\n", "|", "|");
         System.out.printf("%2s%4s\n", "|", body[0]);
         System.out.printf("%2s%3s%1s%1s\n", "|", body[1], body[2], body[3]);
@@ -73,7 +68,7 @@ public class Hangman {
         System.out.println("_|_");
     }
     public void printBoard() {
-        System.out.println("---------");
+        System.out.println("--------- HP: " + hp);
         System.out.printf("%2s%4s\n", "|", "|");
         System.out.printf("%2s%4s\n", "|", body[0]);
         System.out.printf("%2s%3s%1s%1s\n", "|", body[1], body[2], body[3]);

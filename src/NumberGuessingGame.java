@@ -61,7 +61,6 @@ public class NumberGuessingGame {
         System.out.println(intro);
         while (!gameEnd) {
             try {
-//                System.out.println("Random Number: " + randomNumber);
                 System.out.print("Enter your guess: ");
                 int guessNumber = input.nextInt();
                 input.nextLine();
@@ -72,5 +71,4 @@ public class NumberGuessingGame {
             }
         }
     }
-
 }
