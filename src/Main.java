@@ -9,7 +9,7 @@ public class Main {
         String intro = """
                 =============================================
                 Group members:
-                SID: Name:
+                
                 =============================================
                 Welcome to the Game Console : A Trio of Classic Games!
                 Please select a game to play:

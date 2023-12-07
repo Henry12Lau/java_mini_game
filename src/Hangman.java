@@ -15,7 +15,7 @@ public class Hangman {
         turn = 7;
         intro = "Welcome to Hangman!";
         input = new Scanner(System.in);
-        wordPool = new String[]{"tab", "table", "fork"};
+        wordPool = new String[]{"apple", "clock", "hello"};
         randomNum = (int) (Math.random() * wordPool.length);
         word = wordPool[randomNum];
         tempWord = new String[word.length()];
@@ -27,9 +27,14 @@ public class Hangman {
     }
     public void startHangMan(String t) {
         String result = "";
+        String[] array = word.split("");
         int index = word.indexOf(t);
         if (index >= 0) {
-            tempWord[index] = t;
+            for (int i=0; i < array.length; i++){
+                if (array[i].equals(t)) {
+                    tempWord[i] = t;
+                }
+            }
             for (String letter : tempWord) {
                 result += letter;
             }
