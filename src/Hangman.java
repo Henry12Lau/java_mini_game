@@ -10,7 +10,7 @@ public class Hangman {
     private String[] body;
     private String word;
     private String[] tempWord;
-    private int hp;
+    private String[] hp;
     public Hangman(){
         turn = 7;
         intro = "Welcome to Hangman!";
@@ -23,7 +23,7 @@ public class Hangman {
             tempWord[i] = "_";
         }
         body = new String[]{"O", "\\", "|", "/", "|", "/", "\\"};
-        hp = 100;
+        hp = new String[]{"❤ ", "❤ ", "❤ ", "❤ ", "❤ ", "❤ ", "❤"};
     }
     public void startHangMan(String t) {
         String result = "";
@@ -46,7 +46,7 @@ public class Hangman {
             }
         } else {
             turn--;
-            hp -= 10;
+            hp[turn - 1] = "";
             for (String letter : tempWord) {
                 result += letter;
             }
@@ -63,7 +63,7 @@ public class Hangman {
     }
     public void printBoard(int pTurn) {
         body[turn] = "";
-        System.out.println("--------- HP: " + hp);
+        System.out.println("--------- HP: " + hp[0] + hp[1] + hp[2] + hp[3] + hp[4] + hp[5] + hp[6]);
         System.out.printf("%2s%4s\n", "|", "|");
         System.out.printf("%2s%4s\n", "|", body[0]);
         System.out.printf("%2s%3s%1s%1s\n", "|", body[1], body[2], body[3]);
@@ -73,7 +73,7 @@ public class Hangman {
         System.out.println("_|_");
     }
     public void printBoard() {
-        System.out.println("--------- HP: " + hp);
+        System.out.println("--------- HP: " + hp[0] + hp[1] + hp[2] + hp[3] + hp[4] + hp[5] + hp[6]);
         System.out.printf("%2s%4s\n", "|", "|");
         System.out.printf("%2s%4s\n", "|", body[0]);
         System.out.printf("%2s%3s%1s%1s\n", "|", body[1], body[2], body[3]);
@@ -85,7 +85,7 @@ public class Hangman {
     public void run() {
         System.out.println(intro);
         printBoard();
-        System.out.println("Please input a letter.");
+        System.out.println("Please guess a letter.");
         while (!gameEnd) {
             try {
                 String letterInput = input.nextLine().toLowerCase();

@@ -46,13 +46,15 @@ public class NumberGuessingGame {
     }
 
     public void changeRange(int guessNumber) {
-        if (guessNumber > randomNumber) {
+        if (guessNumber > randomNumber && upperInterval > guessNumber) {
             upperInterval = guessNumber;
             numberStatus = "high";
-        } else {
+        } else if (guessNumber < randomNumber && lowerInterval < guessNumber){
             lowerInterval = guessNumber;
             numberStatus = "low";
-        }
+        } else if (guessNumber > randomNumber) {
+            numberStatus = "high";
+        } else numberStatus = "low";
     }
 
     public void run() {
